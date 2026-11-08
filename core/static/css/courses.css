@@ -1,0 +1,445 @@
+/* ============================================================
+   COURSES PAGE — MIND-BLOWING 3D GLASS STYLE
+   ============================================================ */
+
+/* ---------- 1. Cinematic Page Hero ---------- */
+.page-hero {
+  position: relative;
+  padding: clamp(8rem, 15vh, 12rem) clamp(1.25rem, 5vw, 5rem) clamp(4rem, 8vh, 6rem);
+  text-align: center;
+  overflow: hidden;
+  z-index: 2;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 229, 196, 0.1) 0%, transparent 70%),
+              linear-gradient(180deg, #04070e 0%, #0a1020 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  perspective: 1000px;
+}
+
+.page-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 1rem 0;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+
+.page-desc {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.8;
+  color: #a3b0c8;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.page-hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.teal-glow { top: -20%; left: 5%; width: 600px; height: 600px; background: rgba(0, 229, 196, 0.2); }
+.gold-glow { bottom: -20%; right: 5%; width: 500px; height: 500px; background: rgba(255, 203, 107, 0.15); }
+
+/* ---------- 2. Glass Filter Bar ---------- */
+.courses-filter-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(3rem, 6vh, 5rem);
+  position: relative;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: rgba(13, 21, 38, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: fit-content;
+  margin-inline: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: #8496b6;
+  padding: 0.6rem 1.4rem;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+
+.filter-btn.active {
+  background: #00e5c4;
+  color: #0d1526;
+  box-shadow: 0 4px 15px rgba(0, 229, 196, 0.4);
+}
+
+/* ---------- 3. The 3D Masterpiece Cards ---------- */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  perspective: 2000px; /* Deep 3D space */
+}
+
+.course-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(165deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 40%, rgba(13,21,38,0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 30px 60px -15px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: transform 0.1s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+/* Card Hover Glow */
+.course-card:hover {
+  border-color: rgba(0, 229, 196, 0.4);
+  box-shadow: 
+    0 40px 80px -20px rgba(0, 0, 0, 0.9),
+    0 0 60px rgba(0, 229, 196, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* The Glowing Top Edge */
+.course-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 20%; right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00e5c4, transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  box-shadow: 0 0 20px #00e5c4;
+  z-index: 5;
+}
+.course-card:hover::before { opacity: 1; }
+
+/* Image fades into the glass */
+.course-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  transform: translateZ(20px) scale(1.02); /* Floats in 3D */
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  filter: brightness(0.9) saturate(1.2);
+}
+.course-card:hover img {
+  transform: translateZ(40px) scale(1.08);
+  filter: brightness(1.1) saturate(1.3);
+}
+
+.course-content {
+  padding: 0 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transform: translateZ(30px); /* Text floats above the card */
+}
+
+.course-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #00e5c4;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.8rem;
+  background: rgba(0, 229, 196, 0.1);
+  border: 1px solid rgba(0, 229, 196, 0.2);
+  border-radius: 6px;
+  align-self: flex-start;
+  transform: translateZ(10px);
+}
+
+.course-content h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 0.6rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.course-content p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #a3b0c8;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+/* Meta info */
+.course-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8496b6;
+}
+
+.course-meta span { display: flex; align-items: center; gap: 0.4rem; }
+.course-meta i { color: #ffcb6b; font-size: 0.9rem; }
+
+/* Action Link */
+.course-content a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffcb6b;
+  text-decoration: none;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  transform: translateZ(20px);
+}
+
+.course-content a i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.course-card:hover .course-content a { color: #fff; }
+.course-card:hover .course-content a i { transform: translateX(5px); }
+
+/* ---------- 4. Why Section ---------- */
+.why-section {
+  background: #04070e;
+  padding: clamp(5rem, 10vh, 8rem) clamp(1.25rem, 5vw, 5rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.why-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  perspective: 1000px;
+}
+
+.why-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.why-card:hover {
+  background: rgba(0, 229, 196, 0.05);
+  border-color: rgba(0, 229, 196, 0.2);
+  transform: translateY(-8px) translateZ(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.why-card > i {
+  font-size: 1.8rem;
+  color: #00e5c4;
+  margin-bottom: 1rem;
+  display: block;
+  transform: translateZ(30px);
+  filter: drop-shadow(0 0 10px rgba(0, 229, 196, 0.5));
+}
+
+.why-card h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  transform: translateZ(20px);
+}
+
+.why-card p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #8496b6;
+  transform: translateZ(10px);
+}
+
+/* ---------- 5. Responsive ---------- */
+@media (max-width: 1100px) { .courses-grid, .why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) {
+  .courses-grid, .why-grid { grid-template-columns: 1fr; }
+  .courses-filter-bar { border-radius: 16px; width: 100%; overflow-x: auto; justify-content: flex-start; }
+  .filter-btn { white-space: nowrap; }
+  .course-card { transform: none !important; }
+  .course-card img, .course-content { transform: none !important; }
+}
+
+/* ============================================================
+   NAVBAR DROPDOWN MENU
+   ============================================================ */
+
+/* Dropdown container */
+.navbar .dropdown {
+  position: relative;
+}
+
+/* The Hover Trigger */
+.navbar .dropdown > a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+/* The Dropdown Menu Itself */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(15px);
+  width: 280px;
+  background: linear-gradient(165deg, rgba(20, 30, 48, 0.95) 0%, rgba(8, 12, 24, 0.98) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 0.6rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.7), 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+}
+
+/* The Invisible Bridge (stops menu closing when moving mouse down) */
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+}
+
+/* Show menu on hover */
+.navbar .dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(8px);
+}
+
+/* Arrow pointing up */
+.dropdown-menu::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: rgba(20, 30, 48, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Menu Items */
+.dropdown-menu li {
+  margin-bottom: 0.2rem;
+}
+
+.dropdown-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(0, 229, 196, 0.08);
+  transform: translateX(4px);
+}
+
+/* Menu Icons */
+.dropdown-menu a > i {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(0, 229, 196, 0.1);
+  color: #00e5c4;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu a:hover > i {
+  background: #00e5c4;
+  color: #04070e;
+  box-shadow: 0 0 15px rgba(0, 229, 196, 0.5);
+  transform: rotate(-5deg) scale(1.05);
+}
+
+/* Menu Text */
+.dropdown-menu a div {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu a h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.15rem;
+  transition: color 0.2s ease;
+}
+
+.dropdown-menu a:hover h4 {
+  color: #00e5c4;
+}
+
+.dropdown-menu a p {
+  font-size: 0.75rem;
+  color: #8496b6;
+}
+
+/* Mobile Fix: Hide on small screens (since the mobile nav is hidden anyway) */
+@media (max-width: 900px) {
+  .dropdown-menu {
+    display: none;
+  }
+}

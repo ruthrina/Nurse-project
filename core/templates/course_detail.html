@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ course.title }} | Nurses Revision Uganda{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/course_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- COURSE HERO (Dynamic: Pulls Title, Description, Duration, Level from Admin) -->
+    <header class="course-hero">
+        <div class="course-hero-content">
+            <div class="breadcrumb">
+                <a href="{% url 'courses' %}">Courses</a> <i class="fas fa-chevron-right"></i> 
+                <span>{{ course.title }}</span>
+            </div>
+            <h1 class="course-hero-title">{{ course.title }}</h1>
+            <p class="course-hero-desc">{{ course.description }}</p>
+            <div class="course-hero-meta">
+                <span><i class="far fa-clock"></i> {{ course.duration }}</span>
+                <span><i class="fas fa-layer-group"></i> {{ modules|length }} Modules</span>
+                <span><i class="fas fa-graduation-cap"></i> {{ course.level }}</span>
+            </div>
+            <a href="#modules" class="btn-enroll">Explore Syllabus <i class="fas fa-arrow-down"></i></a>
+        </div>
+        <div class="course-hero-glow"></div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <section class="course-details-section">
+        <div class="details-grid">
+            
+            <div class="course-main-content">
+                <div class="content-block" id="modules">
+                    <h2>Course Outline</h2>
+                    <p class="block-desc">Review the modules and topics covered in this programme.</p>
+                    
+                    {% for module in modules %}
+                    <div class="module-section">
+                        <!-- Module Header -->
+                        <div class="module-header">
+                            <span class="module-num">{{ module.order|stringformat:"02d" }}</span>
+                            <h3>{{ module.title }}</h3>
+                        </div>
+
+                        <div class="topics-container">
+                            {% for topic in module.topics.all %}
+                            
+                            <!-- Main Topic Title -->
+                            <div class="topic-group">
+                                <h4 class="topic-title">{{ topic.title }}</h4>
+                                
+                                <!-- Subtopics Grid (Images & Descriptions) -->
+                                <div class="subtopics-grid">
+                                    {% for subtopic in topic.subtopics.all %}
+                                    <div class="subtopic-card">
+                                        {% if subtopic.image %}
+                                        <div class="subtopic-image">
+                                            <img src="{{ subtopic.image.url }}" alt="{{ subtopic.title }}">
+                                        </div>
+                                        {% endif %}
+                                        <div class="subtopic-content">
+                                            <h5>{{ subtopic.title }}</h5>
+                                            <p>{{ subtopic.description }}</p>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            {% empty %}
+                            <p class="empty-state-text">No topics have been added to this module yet.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% empty %}
+                    <!-- Empty State if Admin hasn't added modules for this course yet -->
+                    <div class="empty-state-box">
+                        <i class="fas fa-folder-open"></i>
+                        <h3>Course Content Coming Soon</h3>
+                        <p>Our academic team is currently uploading the syllabus for the {{ course.title }} programme. Please check back shortly.</p>
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <aside class="course-sidebar">
+                <div class="sidebar-card highlight-card">
+                    <h3><i class="fas fa-folder-open"></i> Study Resources</h3>
+                    <p>Access all notes, PDFs, and past papers for this programme.</p>
+                    <a href="{% url 'materials' %}" class="sidebar-btn">Go to Materials</a>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3><i class="fas fa-circle-question"></i> Need Help?</h3>
+                    <p>Have questions about this programme? Our academic support team is here to assist you.</p>
+                    <a href="{% url 'contact' %}" class="sidebar-btn">Contact Support</a>
+                </div>
+            </aside>
+
+        </div>
+    </section>
+
+{% endblock %}

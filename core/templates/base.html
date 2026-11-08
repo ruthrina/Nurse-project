@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Nurses Revision Uganda{% endblock %}</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js Importmap -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+      }
+    }
+    </script>
+
+    <!-- Main Shared CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- Page-specific CSS (Courses, etc. will inject here) -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+        <div class="nav-glow-bg"></div>
+
+        <a href="{% url 'home' %}" class="logo" style="text-decoration:none;">
+            <div class="logo-icon">
+                <i class="fas fa-heart-pulse"></i>
+            </div>
+            <div class="logo-text">
+                <span>Nurses</span><br>Revision<br><span class="highlight">Uganda</span>
+            </div>
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><i class="fas fa-home"></i> Home</a></li>
+
+            <!-- ================= DYNAMIC COURSES DROPDOWN ================= -->
+            <li class="dropdown">
+                <a href="{% url 'courses' %}" class="{% if request.resolver_match.url_name == 'courses' %}active{% endif %}">
+                    Courses <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for course in nav_courses %}
+                    <li>
+                        <a href="{% url 'course_detail' course.slug %}">
+                            <i class="fas fa-book-medical"></i>
+                            <div>
+                                <h4>{{ course.title }}</h4>
+                                <p>{{ course.level }} Level</p>
+                            </div>
+                        </a>
+                    </li>
+                    {% empty %}
+                    <li>
+                        <div style="padding: 1rem; color: #8496b6; font-size: 0.85rem; text-align: center;">
+                            No courses available yet.
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <!-- ==================================================== -->
+
+            <!-- ================= MATERIALS DROPDOWN ================= -->
+            <li class="dropdown">
+                <a href="{% url 'materials' %}" class="{% if request.resolver_match.url_name == 'materials' %}active{% endif %}">
+                    Study Materials <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'materials' %}#notes">
+                            <i class="fas fa-file-lines"></i>
+                            <div>
+                                <h4>Lecture Notes</h4>
+                                <p>Study by topic</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'materials' %}#pdfs">
+                            <i class="fas fa-file-pdf"></i>
+                            <div>
+                                <h4>Revision PDFs</h4>
+                                <p>Quick summaries</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'materials' %}#past-papers">
+                            <i class="fas fa-file-circle-check"></i>
+                            <div>
+                                <h4>Past Papers</h4>
+                                <p>Exam preparation</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'materials' %}#guidelines">
+                            <i class="fas fa-book-medical"></i>
+                            <div>
+                                <h4>Clinical Guidelines</h4>
+                                <p>Hospital procedures</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- ==================================================== -->
+
+            <!-- QUIZZES DIRECT LINK (Removed arrow) -->
+            <li><a href="{% url 'quizzes' %}" class="{% if request.resolver_match.url_name == 'quizzes' %}active{% endif %}">Exams & Quiz</a></li>
+            
+            <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">About / Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+    <button class="icon-btn"><i class="fas fa-search"></i></button>
+    <a href="/admin/" class="btn-login-magic">
+        <span>Login</span>
+        <i class="fas fa-arrow-right"></i>
+    </a>
+</div>
+    </nav>
+
+    <!-- MAIN CONTENT (Pages will inject their content here) -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="{% url 'home' %}" class="logo footer-logo" style="text-decoration:none;">
+                    <div class="logo-icon"><i class="fas fa-heart-pulse"></i></div>
+                    <div class="logo-text">
+                        <strong>Nurses <span>Revision</span></strong>
+                        <small>UGANDA</small>
+                    </div>
+                </a>
+
+                <p>Supporting nursing and midwifery students with accessible learning resources, revision materials and examination practice.</p>
+
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Explore</h3>
+                <a href="{% url 'courses' %}">Our Courses</a>
+                <a href="{% url 'materials' %}">Study Materials</a>
+                <a href="{% url 'quizzes' %}">Practice Quizzes</a>
+            </div>
+
+            <div class="footer-links">
+                <h3>About</h3>
+                <a href="#">Who We Are</a>
+                <a href="{% url 'contact' %}">Contact Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+            </div>
+
+            <div class="footer-links">
+                <h3>Get in Touch</h3>
+                <a href="mailto:info@nursesrevisionuganda.com"><i class="fas fa-envelope"></i> Email Us</a>
+                <a href="#"><i class="fas fa-location-dot"></i> Uganda</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Nurses Revision Uganda. All Rights Reserved.</p>
+            <p>Made with <i class="fas fa-heart"></i> for the future of nursing.</p>
+        </div>
+    </footer>
+
+    <!-- SHARED SCRIPTS -->
+    <script type="module" src="{% static 'js/scene.js' %}"></script>
+    <script src="{% static 'js/main.js' %}" defer></script>
+    
+    <!-- Page-specific Scripts -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

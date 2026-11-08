@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Exams & Quizzes | Nurses Revision Uganda{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/quizzes.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ==========================================
+     LIGHT WRAPPER (White background)
+     ========================================== -->
+<div class="quizzes-page-wrapper">
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="section-tag"><i class="fas fa-brain"></i> TEST YOUR KNOWLEDGE</div>
+            <h1 class="page-title">Don't Just Read. <span class="gradient-text">Test What You Know!</span></h1>
+            <p class="page-desc">
+                Challenge yourself with nursing questions, practise important topics, 
+                and discover where you can improve before exam day.
+            </p>
+        </div>
+    </header>
+
+    <!-- LIVE DEMO QUIZ -->
+    <section class="demo-quiz-section">
+        <div class="demo-quiz-card">
+            <div class="quiz-header">
+                <span class="quiz-badge"><i class="fas fa-bolt"></i> DAILY CHALLENGE</span>
+                <span class="quiz-time"><i class="fas fa-clock"></i> 00:45</span>
+            </div>
+            
+            <h3 class="quiz-question">Which organ is primarily responsible for pumping blood throughout the body?</h3>
+            
+            <div class="quiz-options">
+                <button class="quiz-option">A. Lungs</button>
+                <button class="quiz-option correct">B. Heart <i class="fas fa-check-circle"></i></button>
+                <button class="quiz-option">C. Liver</button>
+                <button class="quiz-option">D. Kidneys</button>
+            </div>
+
+            <div class="quiz-footer">
+                <span>Question 1 of 20</span>
+                <a href="#" class="quiz-next-btn">Next Question <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ CATEGORIES -->
+    <section class="quiz-categories">
+        <div class="section-heading">
+            <span class="section-tag">CHOOSE YOUR TOPIC</span>
+            <h2>Practice by <span class="gradient-text">Subject</span></h2>
+        </div>
+
+        <div class="quizzes-grid">
+            <!-- Card 1 -->
+            <article class="quiz-card">
+                <div class="quiz-card-icon"><i class="fas fa-bone"></i></div>
+                <h3>Anatomy & Physiology</h3>
+                <p>Test your knowledge of the human body systems, structures, and functions.</p>
+                <div class="quiz-card-meta">
+                    <span><i class="fas fa-list-ol"></i> 50 Questions</span>
+                </div>
+                <a href="#" class="quiz-card-btn">Start Quiz <i class="fas fa-play"></i></a>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="quiz-card">
+                <div class="quiz-card-icon"><i class="fas fa-pills"></i></div>
+                <h3>Pharmacology</h3>
+                <p>Review drug classifications, mechanisms of action, and side effects.</p>
+                <div class="quiz-card-meta">
+                    <span><i class="fas fa-list-ol"></i> 40 Questions</span>
+                </div>
+                <a href="#" class="quiz-card-btn">Start Quiz <i class="fas fa-play"></i></a>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="quiz-card">
+                <div class="quiz-card-icon"><i class="fas fa-hospital-user"></i></div>
+                <h3>Medical-Surgical Nursing</h3>
+                <p>Practice nursing care for patients with medical and surgical conditions.</p>
+                <div class="quiz-card-meta">
+                    <span><i class="fas fa-list-ol"></i> 60 Questions</span>
+                </div>
+                <a href="#" class="quiz-card-btn">Start Quiz <i class="fas fa-play"></i></a>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="quiz-card">
+                <div class="quiz-card-icon"><i class="fas fa-baby"></i></div>
+                <h3>Maternal & Child Health</h3>
+                <p>Explore pregnancy, childbirth, and newborn care scenarios.</p>
+                <div class="quiz-card-meta">
+                    <span><i class="fas fa-list-ol"></i> 35 Questions</span>
+                </div>
+                <a href="#" class="quiz-card-btn">Start Quiz <i class="fas fa-play"></i></a>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="quiz-card">
+                <div class="quiz-card-icon"><i class="fas fa-brain"></i></div>
+                <h3>Mental Health Nursing</h3>
+                <p>Assess your understanding of psychiatric disorders and compassionate care.</p>
+                <div class="quiz-card-meta">
+                    <span><i class="fas fa-list-ol"></i> 30 Questions</span>
+                </div>
+                <a href="#" class="quiz-card-btn">Start Quiz <i class="fas fa-play"></i></a>
+            </article>
+
+            <!-- Card 6 -->
+            <article class="quiz-card">
+                <div class="quiz-card-icon"><i class="fas fa-notes-medical"></i></div>
+                <h3>Nursing Foundations</h3>
+                <p>Master the core principles, ethics, and foundations of nursing practice.</p>
+                <div class="quiz-card-meta">
+                    <span><i class="fas fa-list-ol"></i> 45 Questions</span>
+                </div>
+                <a href="#" class="quiz-card-btn">Start Quiz <i class="fas fa-play"></i></a>
+            </article>
+        </div>
+    </section>
+
+    <!-- LEADERBOARD -->
+    <section class="leaderboard-section">
+        <div class="section-heading">
+            <span class="section-tag">TOP PERFORMERS</span>
+            <h2>Weekly <span class="gradient-text">Leaderboard</span></h2>
+        </div>
+
+        <div class="leaderboard-list">
+            <div class="leader-item rank-1">
+                <div class="rank-badge"><i class="fas fa-crown"></i></div>
+                <div class="rank-avatar">SA</div>
+                <div class="rank-info">
+                    <h4>Sarah A.</h4>
+                    <p>Diploma in Nursing</p>
+                </div>
+                <div class="rank-score">
+                    <span>980 pts</span>
+                    <i class="fas fa-trophy"></i>
+                </div>
+            </div>
+
+            <div class="leader-item rank-2">
+                <div class="rank-badge">2</div>
+                <div class="rank-avatar">JM</div>
+                <div class="rank-info">
+                    <h4>John M.</h4>
+                    <p>Bachelor of Nursing</p>
+                </div>
+                <div class="rank-score">
+                    <span>945 pts</span>
+                </div>
+            </div>
+
+            <div class="leader-item rank-3">
+                <div class="rank-badge">3</div>
+                <div class="rank-avatar">GN</div>
+                <div class="rank-info">
+                    <h4>Grace N.</h4>
+                    <p>Midwifery</p>
+                </div>
+                <div class="rank-score">
+                    <span>890 pts</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div> <!-- END LIGHT WRAPPER -->
+
+{% endblock %}

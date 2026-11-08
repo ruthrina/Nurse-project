@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Courses | Nurses Revision Uganda{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/courses.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="section-tag"><i class="fas fa-graduation-cap"></i> ACADEMIC PROGRAMMES</div>
+            <h1 class="page-title">Choose Your <span class="gradient-text">Nursing Path</span></h1>
+            <p class="page-desc">
+                Whether you are just starting your journey or advancing your career, 
+                we have the resources to help you excel in your nursing programme.
+            </p>
+        </div>
+        <div class="page-hero-glow teal-glow"></div>
+        <div class="page-hero-glow gold-glow"></div>
+    </header>
+
+    <!-- COURSES DIRECTORY -->
+    <section class="courses-section section-padding" id="courses" style="padding-top: 2rem;">
+        
+        <!-- Filter Bar -->
+        <div class="courses-filter-bar">
+            <button class="filter-btn active">All Programmes</button>
+            <button class="filter-btn">Certificates</button>
+            <button class="filter-btn">Diplomas</button>
+            <button class="filter-btn">Degrees</button>
+            <button class="filter-btn">Specialties</button>
+        </div>
+
+        <div class="courses-grid">
+            <!-- LOOP THROUGH COURSES FROM DATABASE -->
+            {% for course in courses %}
+            <article class="course-card">
+                
+                <!-- DYNAMIC IMAGE LOGIC -->
+                {% if course.image %}
+                    <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                {% else %}
+                    <div class="course-image-placeholder" style="height: 220px; background: rgba(0, 229, 196, 0.05); display: grid; place-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i class="fas fa-book-medical" style="font-size: 3rem; color: #00e5c4; opacity: 0.5;"></i>
+                    </div>
+                {% endif %}
+                
+                <div class="course-content">
+                    <!-- Level (e.g., Degree, Diploma) -->
+                    <span class="course-label">{{ course.level|upper }} PROGRAMME</span>
+                    
+                    <!-- Title -->
+                    <h3>{{ course.title }}</h3>
+                    
+                    <!-- Description -->
+                    <p>{{ course.description|truncatewords:15 }}</p>
+                    
+                    <!-- Meta (Duration & Modules) -->
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> {{ course.duration }}</span>
+                        <span><i class="fas fa-layer-group"></i> {{ course.modules.count }} Modules</span>
+                    </div>
+                    
+                    <!-- Link to detail page -->
+                    <a href="{% url 'course_detail' course.slug %}">Explore Programme <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            {% empty %}
+            <!-- If admin hasn't added any courses yet -->
+            <div class="empty-courses" style="grid-column: 1 / -1; text-align: center; padding: 4rem 0;">
+                <i class="fas fa-folder-open" style="font-size: 3rem; color: #8496b6; margin-bottom: 1rem;"></i>
+                <h3 style="color: #fff;">No Courses Available Yet</h3>
+                <p style="color: #8496b6;">Please check back later or contact support.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- WHY STUDY WITH US -->
+    <section class="why-section section-padding" id="about">
+        <div class="section-heading">
+            <span class="section-tag">THE ACADEMIC ADVANTAGE</span>
+            <h2>Why Study Through <span class="gradient-text">Our Platform?</span></h2>
+            <p>We align our resources directly with the Ugandan nursing curriculum to ensure you are fully prepared for your exams.</p>
+        </div>
+
+        <div class="why-grid">
+            <article class="why-card">
+                <i class="fas fa-book-open-reader"></i>
+                <h3>Curriculum Aligned</h3>
+                <p>Every note, PDF, and quiz is mapped directly to your specific course syllabus and module requirements.</p>
+            </article>
+            <article class="why-card">
+                <i class="fas fa-file-signature"></i>
+                <h3>Past Papers & Answers</h3>
+                <p>Access an extensive library of past examination papers complete with marking guides to test your readiness.</p>
+            </article>
+            <article class="why-card">
+                <i class="fas fa-laptop-medical"></i>
+                <h3>Clinical Case Studies</h3>
+                <p>Bridge the gap between theory and practice with real-world clinical scenarios and nursing care plans.</p>
+            </article>
+            <article class="why-card">
+                <i class="fas fa-user-nurse"></i>
+                <h3>Expert Tutors</h3>
+                <p>Our materials are curated by experienced Ugandan nursing tutors and practicing healthcare professionals.</p>
+            </article>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block title %}Home | Nurses Revision Uganda{% endblock %}
+
+{% block content %}
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-image-bg">
+            <img src="{% static 'images/nurse.png' %}" alt="Professional Nurse">
+        </div>
+
+        <div class="hero-content">
+            <div class="welcome-badge">
+                <span class="pulse-dot"></span> Welcome to the Future of Nursing
+            </div>
+            
+            <h1 class="hero-title">
+                <span class="title-silver">Nurses Revision</span><br>
+                <span class="gradient-text">Uganda</span>
+            </h1>
+            
+            <h3 class="hero-subtitle">
+                Learn <span class="dot">•</span> Revise <span class="dot">•</span> Practice <span class="dot">•</span> <span class="highlight-yellow">Excel!</span>
+            </h3>
+            
+            <p class="hero-desc">
+                Your one-stop online platform for Nursing and Midwifery notes, past papers, quizzes and more. Study anytime, anywhere and achieve your dreams!
+            </p>
+            
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Search notes, subjects, or exams...">
+                    <button type="submit">Search</button>
+                </div>
+            </div>
+
+            <div class="trust-badge">
+                <div class="trust-icons"><i class="fas fa-trophy"></i></div>
+                <span>Study Smart. Pass with Confidence!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- LEARNING HIGHLIGHTS -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stat-card">
+                <i class="fas fa-graduation-cap"></i>
+                <div>
+                    <h3>Multiple</h3>
+                    <p>Nursing Programmes</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-book-open"></i>
+                <div>
+                    <h3>Rich</h3>
+                    <p>Learning Resources</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clipboard-question"></i>
+                <div>
+                    <h3>Interactive</h3>
+                    <p>Practice Questions</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3>Anytime</h3>
+                    <p>Flexible Learning</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <!-- COURSES (Dynamic) -->
+    <section class="courses-section section-padding" id="courses">
+        <div class="section-heading">
+            <span class="section-tag">YOUR FUTURE STARTS HERE</span>
+            <h2>Explore Your Path to <span class="gradient-text">Nursing Excellence</span></h2>
+            <p>Whatever stage of your nursing education you are at, find learning resources that support your goals. Choose your programme and start exploring.</p>
+        </div>
+
+        <div class="courses-grid">
+            {% for course in courses %}
+            <article class="course-card">
+                
+                <!-- Dynamic Image -->
+                {% if course.image %}
+                    <img src="{{ course.image.url }}" alt="{{ course.title }}">
+                {% else %}
+                    <div class="course-image-placeholder" style="height: 220px; background: rgba(0, 229, 196, 0.05); display: grid; place-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                        <i class="fas fa-book-medical" style="font-size: 3rem; color: #00e5c4; opacity: 0.5;"></i>
+                    </div>
+                {% endif %}
+                
+                <div class="course-content">
+                    <span class="course-label">{{ course.level|upper }} PROGRAMME</span>
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description|truncatewords:15 }}</p>
+                    
+                    <div class="course-meta">
+                        <span><i class="far fa-clock"></i> {{ course.duration }}</span>
+                        <span><i class="fas fa-layer-group"></i> {{ course.modules.count }} Modules</span>
+                    </div>
+                    
+                    <a href="{% url 'course_detail' course.slug %}">Discover Course <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            {% empty %}
+            <!-- Fallback if no courses exist -->
+            <div class="empty-courses" style="grid-column: 1 / -1; text-align: center; padding: 3rem 0;">
+                <p style="color: #8496b6;">Course programmes are currently being updated. Please check back soon.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- SUBJECTS -->
+    <section class="subjects-section section-padding" id="subjects">
+        <div class="section-heading">
+            <span class="section-tag">KNOWLEDGE STARTS WITH CURIOSITY</span>
+            <h2>One Platform. <span class="gradient-text">Many Subjects.</span></h2>
+            <p>Explore important nursing subjects, strengthen your understanding and find the materials you need to master every topic.</p>
+        </div>
+
+        <div class="subjects-grid">
+            <a href="#" class="subject-card">
+                <i class="fas fa-bone"></i>
+                <div>
+                    <h3>Anatomy & Physiology</h3>
+                    <p>Understand the human body and how it works.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-hospital-user"></i>
+                <div>
+                    <h3>Medical-Surgical Nursing</h3>
+                    <p>Explore nursing care across medical and surgical conditions.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-pills"></i>
+                <div>
+                    <h3>Pharmacology</h3>
+                    <p>Learn about medicines, their uses and effects.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-people-group"></i>
+                <div>
+                    <h3>Community Health Nursing</h3>
+                    <p>Discover community care and disease prevention.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-child"></i>
+                <div>
+                    <h3>Paediatric Nursing</h3>
+                    <p>Study child health, development and nursing care.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-baby"></i>
+                <div>
+                    <h3>Maternal & Child Health</h3>
+                    <p>Explore maternal wellbeing and newborn care.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-brain"></i>
+                <div>
+                    <h3>Mental Health Nursing</h3>
+                    <p>Understand mental health and compassionate care.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#" class="subject-card">
+                <i class="fas fa-notes-medical"></i>
+                <div>
+                    <h3>Nursing Foundations</h3>
+                    <p>Master the principles and foundations of nursing.</p>
+                </div>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- QUIZZES -->
+    <section class="quiz-section section-padding" id="quizzes">
+        <div class="quiz-container">
+            <div class="quiz-content">
+                <span class="section-tag">LEARNING THAT CHALLENGES YOU</span>
+                <h2>Don't Just Read.<br><span class="gradient-text">Test What You Know!</span></h2>
+                <p>Turn your revision into an engaging learning experience. Challenge yourself with nursing questions, practise important topics and discover where you can improve.</p>
+                <ul class="quiz-features">
+                    <li><i class="fas fa-circle-check"></i> Multiple-choice nursing questions</li>
+                    <li><i class="fas fa-circle-check"></i> Topic-by-topic practice</li>
+                    <li><i class="fas fa-circle-check"></i> Timed examination simulations</li>
+                    <li><i class="fas fa-circle-check"></i> Instant answers and explanations</li>
+                    <li><i class="fas fa-circle-check"></i> Personal performance tracking</li>
+                </ul>
+                <a href="#" class="btn-primary">Start Practising <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="quiz-visual">
+                <div class="quiz-main-card">
+                    <span>YOUR DAILY CHALLENGE</span>
+                    <h3>How much do you know?</h3>
+                    <p>Put your nursing knowledge to the test and keep growing.</p>
+                    <div class="quiz-question">Which organ is primarily responsible for pumping blood throughout the body?</div>
+                    <div class="quiz-option">A. Lungs</div>
+                    <div class="quiz-option correct">B. Heart <i class="fas fa-check-circle"></i></div>
+                    <div class="quiz-option">C. Liver</div>
+                    <div class="quiz-option">D. Kidneys</div>
+                    <div class="quiz-result"><i class="fas fa-star"></i> Every question is an opportunity to learn!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STUDY MATERIALS -->
+    <section class="materials-section section-padding" id="materials">
+        <div class="section-heading">
+            <span class="section-tag">YOUR KNOWLEDGE LIBRARY</span>
+            <h2>Everything You Need to <span class="gradient-text">Revise Better</span></h2>
+            <p>Find useful learning resources organised to make your nursing revision easier and more effective.</p>
+        </div>
+
+        <div class="materials-grid">
+            <article class="material-card">
+                <i class="fas fa-file-lines"></i>
+                <span>STUDY NOTES</span>
+                <h3>Lecture Notes</h3>
+                <p>Review important concepts with organised nursing lecture notes.</p>
+                <a href="#">Explore Notes <i class="fas fa-arrow-right"></i></a>
+            </article>
+            <article class="material-card">
+                <i class="fas fa-file-pdf"></i>
+                <span>REVISION RESOURCES</span>
+                <h3>Revision PDFs</h3>
+                <p>Access useful documents to support your independent learning.</p>
+                <a href="#">Explore PDFs <i class="fas fa-arrow-right"></i></a>
+            </article>
+            <article class="material-card">
+                <i class="fas fa-file-circle-check"></i>
+                <span>EXAMINATION PREPARATION</span>
+                <h3>Past Examination Papers</h3>
+                <p>Prepare with past papers and familiarise yourself with examination questions.</p>
+                <a href="#">View Past Papers <i class="fas fa-arrow-right"></i></a>
+            </article>
+            <article class="material-card">
+                <i class="fas fa-book-medical"></i>
+                <span>CLINICAL LEARNING</span>
+                <h3>Clinical Guidelines</h3>
+                <p>Explore clinical reference materials and relevant learning guidelines.</p>
+                <a href="#">Explore Resources <i class="fas fa-arrow-right"></i></a>
+            </article>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="why-section section-padding" id="about">
+        <div class="section-heading">
+            <span class="section-tag">A BETTER WAY TO LEARN</span>
+            <h2>Why Learn With <span class="gradient-text">Us?</span></h2>
+            <p>We believe that learning should be accessible, engaging, organised and centred around your success.</p>
+        </div>
+
+        <div class="why-grid">
+            <article class="why-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>Everything in One Place</h3>
+                <p>Find notes, revision materials, practice questions and useful resources without searching everywhere.</p>
+            </article>
+            <article class="why-card">
+                <i class="fas fa-mobile-screen-button"></i>
+                <h3>Learn Anywhere</h3>
+                <p>Access your learning resources conveniently using your phone, tablet or computer.</p>
+            </article>
+            <article class="why-card">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Understand Better</h3>
+                <p>Strengthen your knowledge through subject-based learning and question practice.</p>
+            </article>
+            <article class="why-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Grow With Confidence</h3>
+                <p>Use revision and practice to identify knowledge gaps and improve your preparation.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <i class="fas fa-heart-pulse"></i>
+            <span>YOUR NURSING FUTURE DESERVES THE BEST</span>
+            <h2>Every Great Nurse Starts With a Commitment to Learn.</h2>
+            <p>Take the next step in your learning journey. Explore resources, practise your knowledge and move closer to your academic goals.</p>
+            <a href="#courses" class="btn-cta">Begin Your Learning Journey <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+{% endblock %}

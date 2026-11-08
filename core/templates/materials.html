@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Study Materials | Nurses Revision Uganda{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/materials.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+        <div class="page-hero-content">
+            <div class="section-tag"><i class="fas fa-book-open"></i> KNOWLEDGE LIBRARY</div>
+            <h1 class="page-title">Everything You Need to <span class="gradient-text">Revise Better</span></h1>
+            <p class="page-desc">
+                Access organized lecture notes, revision PDFs, past examination papers, 
+                and clinical guidelines curated specifically for Ugandan nursing students.
+            </p>
+        </div>
+        <div class="page-hero-glow teal-glow"></div>
+        <div class="page-hero-glow gold-glow"></div>
+    </header>
+
+    <!-- 3D SEARCH BAR -->
+    <div class="materials-search-wrapper">
+        <div class="materials-search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" placeholder="Search for topics, modules, or past papers...">
+            <button type="submit">Search</button>
+        </div>
+    </div>
+
+    <!-- 3D MATERIAL CATEGORIES -->
+    <section class="materials-section section-padding" id="materials" style="padding-top: 0;">
+        <div class="materials-grid">
+            
+            <!-- Category 1: Lecture Notes -->
+            <article class="material-card">
+                <div class="material-icon-wrapper">
+                    <i class="fas fa-file-lines"></i>
+                </div>
+                <span class="material-label">STUDY NOTES</span>
+                <h3>Lecture Notes</h3>
+                <p>Comprehensive notes covering all modules, from Anatomy to Medical-Surgical Nursing.</p>
+                <div class="material-meta">
+                    <span><i class="fas fa-folder-open"></i> 45 Documents</span>
+                </div>
+                <a href="#" class="material-link">Browse Notes <i class="fas fa-arrow-right"></i></a>
+            </article>
+
+            <!-- Category 2: Revision PDFs -->
+            <article class="material-card">
+                <div class="material-icon-wrapper">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <span class="material-label">REVISION RESOURCES</span>
+                <h3>Revision PDFs</h3>
+                <p>Quick revision summaries, flashcards, and cheat sheets for fast exam preparation.</p>
+                <div class="material-meta">
+                    <span><i class="fas fa-folder-open"></i> 32 Documents</span>
+                </div>
+                <a href="#" class="material-link">Browse PDFs <i class="fas fa-arrow-right"></i></a>
+            </article>
+
+            <!-- Category 3: Past Papers -->
+            <article class="material-card">
+                <div class="material-icon-wrapper">
+                    <i class="fas fa-file-circle-check"></i>
+                </div>
+                <span class="material-label">EXAM PREPARATION</span>
+                <h3>Past Examination Papers</h3>
+                <p>Practice with real past papers and marking guides to test your readiness.</p>
+                <div class="material-meta">
+                    <span><i class="fas fa-folder-open"></i> 60+ Papers</span>
+                </div>
+                <a href="#" class="material-link">View Past Papers <i class="fas fa-arrow-right"></i></a>
+            </article>
+
+            <!-- Category 4: Clinical Guidelines -->
+            <article class="material-card">
+                <div class="material-icon-wrapper">
+                    <i class="fas fa-book-medical"></i>
+                </div>
+                <span class="material-label">CLINICAL LEARNING</span>
+                <h3>Clinical Guidelines</h3>
+                <p>Standard operating procedures, clinical checklists, and hospital guidelines.</p>
+                <div class="material-meta">
+                    <span><i class="fas fa-folder-open"></i> 15 Documents</span>
+                </div>
+                <a href="#" class="material-link">Explore Guidelines <i class="fas fa-arrow-right"></i></a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- 3D RECENT UPLOADS -->
+    <section class="recent-uploads section-padding">
+        <div class="section-heading" style="text-align: left; margin-bottom: 2rem;">
+            <h2>Recently Added <span class="gradient-text">Resources</span></h2>
+        </div>
+
+        <div class="uploads-list">
+            <a href="#" class="upload-item">
+                <div class="upload-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="upload-info">
+                    <h4>Pharmacology Module 3: Cardiovascular Drugs</h4>
+                    <p>Revision PDF • Uploaded 2 days ago</p>
+                </div>
+                <div class="upload-action"><i class="fas fa-download"></i></div>
+            </a>
+
+            <a href="#" class="upload-item">
+                <div class="upload-icon"><i class="fas fa-file-lines"></i></div>
+                <div class="upload-info">
+                    <h4>Anatomy & Physiology: The Nervous System</h4>
+                    <p>Lecture Notes • Uploaded 3 days ago</p>
+                </div>
+                <div class="upload-action"><i class="fas fa-download"></i></div>
+            </a>
+
+            <a href="#" class="upload-item">
+                <div class="upload-icon"><i class="fas fa-file-circle-check"></i></div>
+                <div class="upload-info">
+                    <h4>Final Exam Past Paper - November 2025</h4>
+                    <p>Past Paper • Uploaded 1 week ago</p>
+                </div>
+                <div class="upload-action"><i class="fas fa-download"></i></div>
+            </a>
+            
+            <a href="#" class="upload-item">
+                <div class="upload-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="upload-info">
+                    <h4>Midwifery: Antenatal Care Guidelines</h4>
+                    <p>Clinical Guideline • Uploaded 1 week ago</p>
+                </div>
+                <div class="upload-action"><i class="fas fa-download"></i></div>
+            </a>
+        </div>
+    </section>
+
+{% endblock %}
+
+<!-- 3D TILT SCRIPT -->
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Only run 3D on devices with a mouse
+  if (window.matchMedia("(pointer: fine)").matches) {
+    
+    // 1. Tilt the Material Cards
+    const cards = document.querySelectorAll('.material-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 10;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `perspective(1200px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+      });
+    });
+
+    // 2. Tilt the Search Bar
+    const searchBox = document.querySelector('.materials-search-box');
+    if(searchBox) {
+      searchBox.addEventListener('mousemove', e => {
+        const rect = searchBox.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        searchBox.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+      });
+      searchBox.addEventListener('mouseleave', () => {
+        searchBox.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+      });
+    }
+  }
+});
+</script>
+{% endblock %}
